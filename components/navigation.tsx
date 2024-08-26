@@ -37,7 +37,7 @@ export const Navigation = () => {
 
   const router = useRouter();
   const pathname = usePathname();
-  const isMobile = useMedia("(max-width: 2000px)", false); // checking if orientation is in mobile form
+  const isMobile = useMedia("(max-width: 1024px)", false); // checking if orientation is in mobile form
 
   const onClick = (href: string) => {
     router.push(href);
