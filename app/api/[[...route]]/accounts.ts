@@ -8,15 +8,16 @@ import { HTTPException } from "hono/http-exception";
 const app = new Hono().get("/", clerkMiddleware(), async (c) => {
   const authenticated = getAuth(c);
 
+  if (!authenticated?.userId) {
+    return c.json({ error: " Unauthorized access" }, 401); // add 401 status code to prevent error in data fetching in for example "user-get-account.ts"
+  }
+
   // if (!authenticated?.userId) {
-  //   return c.json({ error: " Unauthorized access" }, 401);
+  //   throw new HTTPException(401, {
+  //     res: c.json({ error: "Unauthorized access" }, 401),
+  //   });
   // }
 
-  if (!authenticated?.userId) {
-    throw new HTTPException(401, {
-      res: c.json({ error: "Unauthorized access" }, 401),
-    });
-  }
   //fetching from db with drizzle
   const data = await db
     .select({

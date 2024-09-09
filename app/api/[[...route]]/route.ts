@@ -29,12 +29,12 @@ const app = new Hono().basePath("/api");
 // });
 
 //error handling
-app.onError((err, c) => {
-  if (err instanceof HTTPException) {
-    return err.getResponse();
-  }
-  return c.json({ error: "Internal Error" });
-});
+// app.onError((err, c) => {
+//   if (err instanceof HTTPException) {
+//     return err.getResponse();
+//   }
+//   return c.json({ error: "Internal Error" });
+// });
 
 const routes = app.route("/accounts", accounts);
 
